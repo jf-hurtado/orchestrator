@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const express = require('express');
 const orchestatorRoutes = require('./routes/orchestatorRoutes');
-//const { connectDB } = require('./services/database');
 
 const PORT = process.env.PORT || 8080;
 
@@ -13,14 +12,7 @@ app.use(express.json());
 app.use('/', orchestatorRoutes);
 
 const startServer = async () => {
-    try {
-        try {
-            await connectDB();
-        } catch(err) {
-            console.error('[ORCHESTATOR DB] ERROR al conectar la DB', err);
-            process.exit(1);
-        }
-        
+    try {        
         app.listen(PORT, () => {
             const serverURL = `http://localhost:${PORT}`;
             console.log(`[ORCHESTATOR] Servidor corriendo en ${serverURL}`);
